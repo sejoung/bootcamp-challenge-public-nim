@@ -12,6 +12,7 @@ class State(TypedDict):
 model_id = 'nvidia/llama-3.3-nemotron-super-49b-v1'
 
 graph_builder = StateGraph(State)
+# specify base_url if using locally hosted nims
 llm = init_chat_model(model=model_id,model_provider="nvidia")
 def chatbot(state: State):
     return {"messages": [llm.invoke(state["messages"])]}
@@ -45,7 +46,7 @@ For NVIDIA NIMs, this is done through extra_body={"nvext": {"guided_json": json_
 Refer to the following link for more information
 https://docs.nvidia.com/nim/large-language-models/latest/structured-generation.html
 """
-
+# specify base_url if using locally hosted nims
 llm_structured = init_chat_model(model=model_id,model_provider="nvidia").with_structured_output(
     UserIntent, strict=True
 )
