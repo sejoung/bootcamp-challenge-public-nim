@@ -10,8 +10,6 @@ The challenge consists of the following parts.
 2. Creating an Invoice MCP Server
 3. Modifying the existing LLM workflow to utilise both the Q&A and Invoice MCP Servers
 
-Read the [problem statement](./challenge/problem_statement.md) for more details
-
 ## Tools and Frameworks
 
 The tools and frameworks used in this bootcamp are as follows
@@ -25,9 +23,21 @@ The tools and frameworks used in this bootcamp are as follows
 The duration of the tutorial is 1 hour.  
 The duration of the challenge is 4 hours.
 
-## Deployment
+## Steps
 
-To run the evaluation, refer to the [deployment guide](./Deployment_Guide.md)
+1. Clone this repo
+
+```
+git clone https://github.com/openhackathons-org/bootcamp-challenge-public-nim.git
+```
+
+2. Register for an NVIDIA NGC account and setup environment to invoke NVIDIA NIMs
+
+    Refer to the [deployment guide](./Deployment_guide.md)
+
+3. Go through the [tutorials](./tutorial/README.md)
+
+4. Attempt the [challenge](./challenge/problem_statement.md)
 
 ## Attribution
 
