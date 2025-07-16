@@ -1,28 +1,5 @@
 # Model Context Protocol (MCP)
 
-Model Context Protocol (MCP) is an open standard that enables AI applications to connect with external data sources and tools.  
-Think of it as a standardized way for AI models to interact with the world beyond their training data.
-
-## Key Components
-
-The protocol operates on a client-server architecture where:
-
-* MCP Clients are AI applications (e.g. Claude Desktop) that want to access external data
-* MCP Servers are lightweight programs that provide access to specific resources or tools
-* Resources can be files, database records, API endpoints, or any structured data
-* Tools are functions the AI can execute, like running queries or performing calculations
-
-## Practical Applications
-
-Common use cases include connecting AI assistants to:
-
-* Business databases and CRM systems
-* File storage and document repositories
-* Development tools and code repositories
-* APIs and web services
-* Local system resources
-* Content creation tools - e.g. [Claude Desktop with Blender MCP](https://www.youtube.com/watch?v=DqgKuLYUv00)
-
 ## Examples
 
 Go through the below examples in order to understand the basic workings of the MCP protocol.  
