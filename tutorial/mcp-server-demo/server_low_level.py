@@ -18,6 +18,11 @@ logger = logging.getLogger('simple-math')
 async def main():
     server = Server("simple-math")
 
+    """
+    handle_list_tools() returns the name, description and input schema of all available tools.
+    we have defined 2 tools here, addition and subtraction that requires 2 arguments - a and b.
+    similar to server.py, you can define the schema for additional methods like multiply and divide.
+    """
     @server.list_tools()
     async def handle_list_tools() -> list[types.Tool]:
         """List available tools"""
@@ -48,6 +53,12 @@ async def main():
             ),
         ]
 
+    """
+    handle_call_tool() takes in the name and arguments, performs computation and returns the result
+    for the 'add' tool, we perform addition of a and b.
+    for the 'subtract' tool, we perform subtraction of b from a.
+    similar to server.py, you can define additional methods for multiply and divide
+    """
     @server.call_tool()
     async def handle_call_tool(
         name: str, arguments: dict[str, Any] | None
@@ -70,13 +81,16 @@ async def main():
         except Exception as e:
             return [types.TextContent(type="text", text=f"Error: {str(e)}")]
 
+    """
+    Initialize stdio server with read and write stream to receive and send data
+    """
     async with stdio_server() as (read_stream, write_stream):
         logger.info("Server running with stdio transport")
         await server.run(
             read_stream,
             write_stream,
             InitializationOptions(
-                server_name="sqlite",
+                server_name="simple-math",
                 server_version="0.1.0",
                 capabilities=server.get_capabilities(
                     notification_options=NotificationOptions(),
@@ -85,4 +99,5 @@ async def main():
             ),
         )
 
+# the main() method is asynchronous and hence needs to be wrapped in asyncio
 asyncio.run(main())

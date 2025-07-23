@@ -25,11 +25,12 @@ The duration of the challenge is 4 hours.
 
 ## Steps
 
-1. Install required packages
+1. Install prerequisites
 
 * [uv package manager](https://docs.astral.sh/uv/getting-started/installation/)
 * [python](https://docs.astral.sh/uv/guides/install-python/)
 * [git version control](https://github.com/git-guides/install-git)
+* [claude desktop][https://claude.ai/download]
 
 2. Clone this repository
 

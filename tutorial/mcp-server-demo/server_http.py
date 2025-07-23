@@ -16,4 +16,10 @@ def subtract(a: int, b: int) -> int:
     """Add two numbers"""
     return a - b
 
+"""
+Try adding your own tools here
+E.g. multiply(a,b) and divide(a,b)
+"""
+
+# initialise mcp server using streamable-http as a web server
 mcp.run(transport='streamable-http')

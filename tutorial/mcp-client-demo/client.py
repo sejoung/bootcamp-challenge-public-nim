@@ -13,7 +13,10 @@ class MCPClient:
         # Initialize session and client objects
         self.session: Optional[ClientSession] = None
         self.exit_stack = AsyncExitStack()
-
+    
+    """
+    Launch and connect to Stdio MCP Server
+    """
     async def connect_to_server(self, server_script_path: str):
         server_params = StdioServerParameters(
             command="uv",
@@ -28,6 +31,9 @@ class MCPClient:
         self.session = await self.exit_stack.enter_async_context(ClientSession(self.stdio, self.write))
         await self.session.initialize()
     
+    """
+    Connect to HTTP MCP Server that is already running
+    """
     async def connect_to_server_http(self, url: str):
         streamablehttp_transport = await self.exit_stack.enter_async_context(streamablehttp_client(url))
         self.read, self.write, _ = streamablehttp_transport
@@ -38,6 +44,9 @@ class MCPClient:
         """Clean up resources"""
         await self.exit_stack.aclose()
 
+"""
+Invokes tools in Stdio MCP Servers
+"""
 async def main(path_to_server_file):
     mcp_client = MCPClient()
     await mcp_client.connect_to_server(path_to_server_file)
@@ -54,6 +63,9 @@ async def main(path_to_server_file):
     print(f"\nResult from subtract tool: {res_add.content[0].text} ")
     await mcp_client.cleanup()
 
+"""
+Invokes tools in Streamable HTTP MCP Servers
+"""
 async def main_http(url):
     mcp_client = MCPClient()
     await mcp_client.connect_to_server_http(url)

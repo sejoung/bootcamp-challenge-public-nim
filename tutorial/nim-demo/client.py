@@ -13,6 +13,12 @@ class MCPClient:
         self.session: Optional[ClientSession] = None
         self.exit_stack = AsyncExitStack()
 
+    """
+    Connect to the MCP Server using the context library from python
+    The context library simplifies the creation and usage of context managers, 
+    which are objects that define methods for setting up and tearing down resources, 
+    ensuring proper cleanup even if exceptions occur. 
+    """
     async def connect_to_server(self, server_script_path: str):
         server_params = StdioServerParameters(
             command="uv",

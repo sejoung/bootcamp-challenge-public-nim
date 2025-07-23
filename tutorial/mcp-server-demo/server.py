@@ -16,4 +16,10 @@ def subtract(a: int, b: int) -> int:
     """Add two numbers"""
     return a - b
 
+"""
+Try adding your own tools here
+E.g. multiply(a,b) and divide(a,b)
+"""
+
+# initialise mcp server with standard in out as a background process
 mcp.run(transport='stdio')

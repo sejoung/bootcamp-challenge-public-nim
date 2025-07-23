@@ -77,7 +77,7 @@ For this exercise, we opt to use [pydantic-ai](https://github.com/pydantic/pydan
 **Do not install any new dependencies.**   
 **Do not change any of the file/folder names**  
 **Do not change any of the class/function headers**
-
+**Do not change the model id**
 
 ```
 mcp-servers
@@ -113,6 +113,7 @@ The task is to complete the code in the following python files.
 **Do not install any new dependencies.**   
 **Do not change any of the file/folder names**  
 **Do not change any of the class/function headers**
+**Do not change the model id**
 
 ```
 llm_workflow
