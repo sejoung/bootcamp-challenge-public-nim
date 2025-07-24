@@ -8,9 +8,26 @@ Register for an account and generate API key with [build.nvidia.com](https://bui
 
 ## Setup environment variable
 
-```
-export NVIDIA_API_KEY=<your api key>
-```
+### MacOS
+
+1. Open a terminal
+2. Edit .zprofile
+
+    `vi ~/.zprofile`
+
+3. insert the following line to end of file
+
+    `export NVIDIA_API_KEY=<your api key>`
+
+4. exit vi editor
+
+    `source ~/.zprofile`
+
+### Windows
+
+1. Open CMD terminal
+
+    `setx NVIDIA_API_KEY "<your api key>"`
 
 ## LLM Invocation
 
