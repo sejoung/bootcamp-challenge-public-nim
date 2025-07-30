@@ -1,11 +1,17 @@
 # Agentic workflows
 
-Refer to [langgraph-demo](./langgraph-demo/) for an example using langchain to invoke NVIDIA NIMs.  
+## Basics of LangGraph
+
+Go through the following for an introduction to LangGraph.
 
 1) [build a basic chatbot](https://langchain-ai.github.io/langgraph/tutorials/get-started/1-build-basic-chatbot/)
 2) [provide tools to the agent](https://langchain-ai.github.io/langgraph/tutorials/get-started/2-add-tools/)
 3) [add memory to graph](https://langchain-ai.github.io/langgraph/tutorials/get-started/3-add-memory/)
 4) [add human in the loop](https://langchain-ai.github.io/langgraph/tutorials/get-started/4-human-in-the-loop/)
+
+## Invoking NVIDIA NIMs using langGraph/LangChain
+
+Refer to [langgraph-demo](./langgraph-demo/) for an example using LangGraph/LangChain with NVIDIA NIMs.
 
 ## Tool calling with MCP
 
