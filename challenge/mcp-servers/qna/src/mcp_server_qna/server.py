@@ -167,7 +167,7 @@ async def main(db_path:str):
     
     async with stdio_server() as (read_stream,write_stream):
         await mcp.run(read_stream, write_stream, InitializationOptions(
-                server_name="invoice",
+                server_name="qna",
                 server_version="0.1.0",
                 capabilities=mcp.get_capabilities(
                     notification_options=NotificationOptions(),
