@@ -59,6 +59,7 @@ Go through the below examples in order to understand the basic workings of the M
     ```
 
     In claude for Desktop, you can place this in claude_desktop_config.json.  
+    Restart Claude for Desktop after modifying the config file.  
     You should see the tool 'Demo' available in the UI.
     ![claude demo mcp server](./images/claude-mcp-server.png)
 
