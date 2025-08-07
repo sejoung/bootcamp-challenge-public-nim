@@ -122,34 +122,3 @@ def create_workflow(memory):
 
     #app = workflow.compile()
     #return app
-
-if __name__ == '__main__':
-
-    parser = argparse.ArgumentParser(description='Invoice MCP Server')
-    parser.add_argument('--nvidia-api-key', 
-                       default="",
-                       help='your nvidia api key')
-    parser.add_argument('--mcp-server-url', 
-                       default="http://localhost:8000/mcp",
-                       help='mcp server url')
-    parser.add_argument('--inf-url', 
-                       default="https://integrate.api.nvidia.com/v1",
-                       help='base url for inference')
-    args = parser.parse_args()
-
-    input_list = []
-    output_list = []
-    reasoning_list = []
-    scores = []
-    memory = InMemorySaver()
-    config = {
-        "configurable": {"thread_id": "1"},
-        "env":"test",
-        "nvidia_api_key":args.nvidia_api_key,
-        "mcp_server_url":args.mcp_server_url,
-        "inf_url":args.inf_url
-    }
-    app = create_workflow(memory=memory)
-
-    ## TODO
-    ## write your own test scripts

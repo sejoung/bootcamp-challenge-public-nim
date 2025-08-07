@@ -125,6 +125,15 @@ llm_workflow
 └── uv.lock
 ```
 
+## Testing your solution
+
+You can use the following to test your solution locally before submission.  
+The test cases are minimal and you should add in more on your own.  
+
+[mcp server qna test](./mcp-server-qna-test/)
+[mcp server invoice test](./mcp-server-invoice-test/)
+[llm workflow test](./llm-workflow-test/)
+
 ## Submission
 
 To submit, 

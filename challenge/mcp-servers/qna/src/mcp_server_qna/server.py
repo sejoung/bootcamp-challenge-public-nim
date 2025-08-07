@@ -182,8 +182,3 @@ class ServerWrapper():
         asyncio.run(main())
 
 wrapper = ServerWrapper()
-    
-if __name__ == '__main__':
-    qna = QNA("chinook.db")
-    ## TODO
-    ## write your own test scripts
