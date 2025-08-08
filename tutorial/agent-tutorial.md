@@ -2,7 +2,13 @@
 
 ## Basics of LangGraph
 
-Go through the following for an introduction to LangGraph.
+Go through the following for an introduction to LangGraph.  
+For each of the sections, replace code using `init_chat_model` with the below to utilise NIMs.
+
+```python
+# specify base_url if using locally hosted nims
+llm = init_chat_model(model='nvidia/llama-3.3-nemotron-super-49b-v1',model_provider="nvidia")
+```
 
 1) [build a basic chatbot](https://langchain-ai.github.io/langgraph/tutorials/get-started/1-build-basic-chatbot/)
 2) [provide tools to the agent](https://langchain-ai.github.io/langgraph/tutorials/get-started/2-add-tools/)
