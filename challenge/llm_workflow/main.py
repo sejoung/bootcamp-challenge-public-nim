@@ -59,14 +59,64 @@ async def store_agent(state:State,config: RunnableConfig):
         api_key = nvidia_api_key
     )
 
+    system_message = SystemMessage(content=gather_info_instructions)
+    messages =  convert_to_openai_messages([system_message,*state['messages']])
+
     mcp_client = MCPHTTPCLIENT(mcp_server_url)
+    mcp_client.connect()
     
     ## TODO
-    ## implement agent tool calling
+    ## list tools, format tools to openai function calling schema, get response from NVIDIA NIM/LLM
 
-    output = {
-            "messages": [{"role": "assistant", "content": ""}]
-    }
+    if stop_reason == 'tool_calls':
+        for tool_call in response.choices[0].message.tool_calls:
+
+            ## TODO
+            ## Implement tool calling
+            
+            if tool_name == 'invoice_refund':
+                content = f"You have been refunded a total of: ${result}. Is there anything else I can help with?"
+                followup = content
+                output = {
+                    "messages": [tool_message,{"role": "assistant", "content": content}],
+                    "followup": followup,
+                }
+            elif tool_name == 'invoice_lookup':
+                result = json.loads(tool_result.content[0].text)
+                if not result:
+                    content = "We did not find any purchases associated with the information you've provided. Are you sure you've entered all of your information correctly?"
+                    followup = content
+                    output = {
+                        "messages": [tool_message,{"role": "assistant", "content": content}],
+                        "followup": followup,
+                    }
+                else:
+                    content = f"Which of the following purchases would you like to be refunded for?\n\n```json{json.dumps(result, indent=2)}\n```"
+                    followup = f"Which of the following purchases would you like to be refunded for?\n\n{tabulate(result, headers='keys')}"
+                    output = {
+                        "messages": [tool_message,{"role": "assistant", "content": content}],
+                        "followup": followup,
+                        "invoice_line_ids": [item["invoice_line_id"] for item in result],
+                    }
+            elif tool_name == 'media_lookup':
+                content = result
+                followup = content
+                output = {
+                    "messages": [tool_message,{"role": "assistant", "content": content}],
+                    "followup": followup,
+                }
+            
+    elif stop_reason == 'stop':
+        output = {
+            "messages": [{"role": "assistant", "content": response.choices[0].message.content}]
+        }
+
+    else:
+        output = {
+            "messages": [{"role": "assistant", "content": f"unknown error with stop reason {stop_reason}"}]
+        }
+
+    mcp_client.cleanup()
 
     return output
 
