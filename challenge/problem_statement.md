@@ -65,33 +65,12 @@ flowchart LR
 
 ## Assignment
 
-The following folders/files for mcp-servers have been provided to you.  
-The task is to complete the code in the following python files.  
+### Assignment 1 - QNA MCP Server
 
-1) mcp-servers/invoice/src/mcp_server_invoice/qna_agent.py  
-This can be any agentic framework including [autogen](https://github.com/microsoft/autogen), [crewai](https://github.com/crewAIInc/crewAI), [adk](https://github.com/google/adk-python) etc.  
-For this exercise, we opt to use [pydantic-ai](https://github.com/pydantic/pydantic-ai).  
-2) mcp-servers/invoice/src/mcp_server_invoice/server_http.py
-3) mcp-servers/qna/src/mcp_server_qna/server.py
-
-**Do not install any new dependencies.**   
-**Do not change any of the file/folder names**  
-**Do not change any of the class/function headers**
-**Do not change the model id**
+The following folders/files for the qna mcp-server have been provided to you.  
 
 ```
 mcp-servers
-├── invoice
-│   ├── README.md
-│   ├── data
-│   │   └── chinook.db
-│   ├── pyproject.toml
-│   ├── src
-│   │   └── mcp_server_invoice
-│   │       ├── __init__.py
-│   │       ├── qna_agent.py
-│   │       └── server_http.py
-│   └── uv.lock
 └── qna
     ├── README.md
     ├── data
@@ -104,16 +83,67 @@ mcp-servers
     └── uv.lock
 ```
 
-The following folders/files for the llm workflow have been provided to you.  
 The task is to complete the code in the following python files.  
 
-1) llm_workflow/main.py
-2) llm_workflow/mcp_http_client.py
+1) mcp-servers/qna/src/mcp_server_qna/server.py
 
 **Do not install any new dependencies.**   
 **Do not change any of the file/folder names**  
 **Do not change any of the class/function headers**
 **Do not change the model id**
+
+#### Testing your solution
+
+You can use the following to test your solution locally before submission.  
+The test cases are minimal and you should add in more on your own.  
+
+[mcp server qna test](./mcp-server-qna-test/)
+
+### Assignment 2 - Invoice MCP Server
+
+*Ensure assignment 1 is complete before starting on this assignment*
+
+The following folders/files for the invoice mcp-server have been provided to you.  
+
+```
+mcp-servers
+└── invoice
+    ├── README.md
+    ├── data
+    │   └── chinook.db
+    ├── pyproject.toml
+    ├── src
+    │   └── mcp_server_invoice
+    │       ├── __init__.py
+    │       ├── qna_agent.py
+    │       └── server_http.py
+    └── uv.lock
+```
+
+The task is to complete the code in the following python files.
+
+1) mcp-servers/invoice/src/mcp_server_invoice/qna_agent.py  
+This can be any agentic framework including [autogen](https://github.com/microsoft/autogen), [crewai](https://github.com/crewAIInc/crewAI), [adk](https://github.com/google/adk-python) etc.  
+For this exercise, we opt to use [pydantic-ai](https://github.com/pydantic/pydantic-ai).  
+2) mcp-servers/invoice/src/mcp_server_invoice/server_http.py
+
+**Do not install any new dependencies.**   
+**Do not change any of the file/folder names**  
+**Do not change any of the class/function headers**
+**Do not change the model id**
+
+#### Testing your solution
+
+You can use the following to test your solution locally before submission.  
+The test cases are minimal and you should add in more on your own.  
+
+[mcp server invoice test](./mcp-server-invoice-test/)
+
+### Assignment 3 - LLM Workflow
+
+*Ensure assignemnts 1 and 2 are complete before starting on this assignment*
+
+The following folders/files for the llm workflow have been provided to you.  
 
 ```
 llm_workflow
@@ -125,13 +155,21 @@ llm_workflow
 └── uv.lock
 ```
 
-## Testing your solution
+The task is to complete the code in the following python files.  
+
+1) llm_workflow/main.py
+2) llm_workflow/mcp_http_client.py
+
+**Do not install any new dependencies.**   
+**Do not change any of the file/folder names**  
+**Do not change any of the class/function headers**
+**Do not change the model id**
+
+#### Testing your solution
 
 You can use the following to test your solution locally before submission.  
 The test cases are minimal and you should add in more on your own.  
 
-[mcp server qna test](./mcp-server-qna-test/)
-[mcp server invoice test](./mcp-server-invoice-test/)
 [llm workflow test](./llm-workflow-test/)
 
 ## Submission
