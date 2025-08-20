@@ -141,7 +141,7 @@ The test cases are minimal and you should add in more on your own.
 
 ### Assignment 3 - LLM Workflow
 
-*Ensure assignemnts 1 and 2 are complete before starting on this assignment*
+*Ensure assignments 1 and 2 are complete before starting on this assignment*
 
 The following folders/files for the llm workflow have been provided to you.  
 
