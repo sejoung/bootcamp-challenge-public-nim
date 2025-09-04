@@ -20,7 +20,7 @@ The tools and frameworks used in this bootcamp are as follows
 
 ## Bootcamp Duration
 
-The duration of the tutorial is 1 hour.  
+The duration of the tutorial is 2 hours.  
 The duration of the challenge is 4 hours.
 
 ## Prerequisites
@@ -92,13 +92,11 @@ The duration of the challenge is 4 hours.
     git clone https://github.com/openhackathons-org/bootcamp-challenge-public-nim.git
     ```
 
-2. Go through the [deployment guide](./Deployment_guide.md) to setup your environment for LLM invocation powered by NVIDIA NIM.
+2. Learn how to build MCP Clients/Servers for agentic tool calling in the [MCP tutorial](./tutorial/mcp-tutorial.md).
 
-3. Learn how to build MCP Clients/Servers for agentic tool calling in the [MCP tutorial](./tutorial/mcp-tutorial.md).
+3. Learn how to utilise NVIDIA NIMs and MCP in agentic workflows using the [Agent tutorial](./tutorial/agent-tutorial.md)
 
-4. Learn how to utilise NVIDIA NIMs and MCP in agentic workflows using the [Agent tutorial](./tutorial/agent-tutorial.md)
-
-5. Attempt the [challenge](./challenge/problem_statement.md) to modify an existing LLM workflow to utilise NVIDIA NIM and MCP.
+4. Attempt the [challenge](./challenge/problem_statement.md) to modify an existing LLM workflow to utilise NVIDIA NIM and MCP.
 
 ## Attribution
 
