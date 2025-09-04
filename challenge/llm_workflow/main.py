@@ -63,7 +63,7 @@ async def store_agent(state:State,config: RunnableConfig):
     messages =  convert_to_openai_messages([system_message,*state['messages']])
 
     mcp_client = MCPHTTPCLIENT(mcp_server_url)
-    mcp_client.connect()
+    await mcp_client.connect()
     
     ## TODO
     ## list tools, format tools to openai function calling schema, get response from NVIDIA NIM/LLM
@@ -116,7 +116,7 @@ async def store_agent(state:State,config: RunnableConfig):
             "messages": [{"role": "assistant", "content": f"unknown error with stop reason {stop_reason}"}]
         }
 
-    mcp_client.cleanup()
+    await mcp_client.cleanup()
 
     return output
 
