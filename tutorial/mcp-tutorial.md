@@ -44,17 +44,21 @@ Go through the below examples in order to understand the basic workings of the M
 
     You can connect Claude for Desktop to the MCP server by using the below configuration.
 
-    ```bash
-    "Demo": {
-        "command": "uv",
-        "args": [
-        "run",
-        "--with",
-        "mcp[cli]",
-        "mcp",
-        "run",
-        "<project_folder>/mcp-server-demo/server.py"
-        ]
+    ```json
+    {
+        "mcpServers": {
+            "Demo": {
+                "command": "uv",
+                "args": [
+                "run",
+                "--with",
+                "mcp[cli]",
+                "mcp",
+                "run",
+                "<project_folder>/mcp-server-demo/server.py"
+                ]
+            }
+        }
     }
     ```
 
