@@ -3,6 +3,7 @@ import os
 import asyncio
 from client import MCPClient
 import json
+import pathlib
 
 async def main(path_to_server_file):
 
@@ -85,6 +86,7 @@ async def main(path_to_server_file):
 
     await mcp_client.cleanup()
 
-asyncio.run(main('./tutorial/mcp-server-demo/server_low_level.py'))
+tutorial_path = pathlib.Path().resolve().parent
+asyncio.run(main(str(tutorial_path / 'mcp-server-demo/server_low_level.py')))
 
     

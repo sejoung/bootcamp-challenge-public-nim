@@ -6,7 +6,7 @@ from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from mcp.client.streamable_http import streamablehttp_client
 
-import asyncio
+import pathlib
 
 class MCPClient:
     def __init__(self):
@@ -83,11 +83,14 @@ async def main_http(url):
     await mcp_client.cleanup()
 
 if __name__ == '__main__':
+    
+    tutorial_path = pathlib.Path().resolve().parent
+
     # stdio high level sdk
-    asyncio.run(main('./tutorial/mcp-server-demo/server.py'))
+    asyncio.run(main(str(tutorial_path / 'mcp-server-demo/server.py')))
 
     # stdio low level sdk
-    # asyncio.run(main('./tutorial/mcp-server-demo/server_low_level.py'))
+    # asyncio.run(main(str(tutorial_path / 'mcp-server-demo/server_low_level.py')))
 
     # streamable http low/high level sdk
     # asyncio.run(main_http("http://localhost:8000/mcp"))
