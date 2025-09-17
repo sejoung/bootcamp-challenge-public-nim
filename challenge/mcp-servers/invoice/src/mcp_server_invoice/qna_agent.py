@@ -28,5 +28,5 @@ class QNAAgent:
     async def run(self, query):
         ## TODO
         ## run agent with mcp servers and return output
-        response = await self.agent.arun(input=query)
+        response = await self.agent.run(query)
         return response.output
