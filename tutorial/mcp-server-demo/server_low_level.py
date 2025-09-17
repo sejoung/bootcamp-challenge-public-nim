@@ -1,19 +1,14 @@
-import os
-import sys
-import logging
-from contextlib import closing
-from pathlib import Path
-from pydantic import AnyUrl
-from typing import Any
 import asyncio
+import logging
+from typing import Any
 
+import mcp.types as types
 from mcp.server import InitializationOptions
 from mcp.server.lowlevel import Server, NotificationOptions
 from mcp.server.stdio import stdio_server
-import mcp.types as types
-
 
 logger = logging.getLogger('simple-math')
+
 
 async def main():
     server = Server("simple-math")
@@ -23,6 +18,7 @@ async def main():
     we have defined 2 tools here, addition and subtraction that requires 2 arguments - a and b.
     similar to server.py, you can define the schema for additional methods like multiply and divide.
     """
+
     @server.list_tools()
     async def handle_list_tools() -> list[types.Tool]:
         """List available tools"""
@@ -36,7 +32,7 @@ async def main():
                         "a": {"type": "number", "description": "1st integer"},
                         "b": {"type": "number", "description": "2nd integer"}
                     },
-                    "required": ["a","b"],
+                    "required": ["a", "b"],
                 },
             ),
             types.Tool(
@@ -48,7 +44,7 @@ async def main():
                         "a": {"type": "number", "description": "1st integer"},
                         "b": {"type": "number", "description": "2nd integer"}
                     },
-                    "required": ["a","b"]
+                    "required": ["a", "b"]
                 },
             ),
         ]
@@ -59,9 +55,10 @@ async def main():
     for the 'subtract' tool, we perform subtraction of b from a.
     similar to server.py, you can define additional methods for multiply and divide
     """
+
     @server.call_tool()
     async def handle_call_tool(
-        name: str, arguments: dict[str, Any] | None
+            name: str, arguments: dict[str, Any] | None
     ) -> list[types.TextContent | types.ImageContent | types.EmbeddedResource]:
         """Handle tool execution requests"""
         try:
@@ -98,6 +95,7 @@ async def main():
                 ),
             ),
         )
+
 
 # the main() method is asynchronous and hence needs to be wrapped in asyncio
 asyncio.run(main())

@@ -1,31 +1,29 @@
-import os
-import sys
-import logging
+import asyncio
 import contextlib
+import logging
 from collections.abc import AsyncIterator
 from typing import Any
-import asyncio
 
-from mcp.server import InitializationOptions
-from mcp.server.lowlevel import Server, NotificationOptions
+import mcp.types as types
+import uvicorn
+from mcp.server.lowlevel import Server
 from mcp.server.streamable_http_manager import StreamableHTTPSessionManager
 from starlette.applications import Starlette
 from starlette.routing import Mount
 from starlette.types import Receive, Scope, Send
-import uvicorn
-import mcp.types as types
-
 
 logger = logging.getLogger('simple-math')
 
+
 def main():
     server = Server("simple-math")
-    
+
     """
     handle_list_tools() returns the name, description and input schema of all available tools.
     we have defined 2 tools here, addition and subtraction that requires 2 arguments - a and b.
     similar to server_http.py, you can define the schema for additional methods like multiply and divide.
     """
+
     @server.list_tools()
     async def handle_list_tools() -> list[types.Tool]:
         """List available tools"""
@@ -39,7 +37,7 @@ def main():
                         "a": {"type": "number", "description": "1st integer"},
                         "b": {"type": "number", "description": "2nd integer"}
                     },
-                    "required": ["a","b"],
+                    "required": ["a", "b"],
                 },
             ),
             types.Tool(
@@ -51,7 +49,7 @@ def main():
                         "a": {"type": "number", "description": "1st integer"},
                         "b": {"type": "number", "description": "2nd integer"}
                     },
-                    "required": ["a","b"]
+                    "required": ["a", "b"]
                 },
             ),
         ]
@@ -62,9 +60,10 @@ def main():
     for the 'subtract' tool, we perform subtraction of b from a.
     similar to server_http.py, you can define additional methods for multiply and divide
     """
+
     @server.call_tool()
     async def handle_call_tool(
-        name: str, arguments: dict[str, Any] | None
+            name: str, arguments: dict[str, Any] | None
     ) -> list[types.TextContent | types.ImageContent | types.EmbeddedResource]:
         """Handle tool execution requests"""
         try:
@@ -97,15 +96,16 @@ def main():
     """
     Method to handle incoming http requests
     """
+
     async def handle_streamable_http(
-        scope: Scope, receive: Receive, send: Send
+            scope: Scope, receive: Receive, send: Send
     ) -> None:
         await session_manager.handle_request(scope, receive, send)
-
 
     """
     Method to define actions on startup and shutdown
     """
+
     @contextlib.asynccontextmanager
     async def lifespan(app: Starlette) -> AsyncIterator[None]:
         """Context manager for session manager."""
@@ -131,5 +131,6 @@ def main():
     Initialise starlette web application
     """
     uvicorn.run(starlette_app, host="127.0.0.1")
+
 
 asyncio.run(main())
