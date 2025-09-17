@@ -19,7 +19,8 @@ def main():
 
     args = parser.parse_args()
 
+    print("Starting Invoice MCP server...")
     # streamable http MCP server
     asyncio.run(server_http.main(args.db_path,args.nvidia_api_key,args.mcp_server_qna_path,args.inf_url))
 
-__all__ = ['main','server']
+__all__ = ['main']
