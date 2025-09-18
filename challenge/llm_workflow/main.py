@@ -1,4 +1,3 @@
-import asyncio
 import json
 from typing import Literal
 
@@ -6,14 +5,13 @@ from langchain.chat_models import init_chat_model
 from langchain.schema import SystemMessage
 from langchain_core.messages import convert_to_openai_messages
 from langchain_core.runnables import RunnableConfig
-from langgraph.checkpoint.memory import InMemorySaver
+from langgraph.constants import START, END
 from langgraph.graph import StateGraph
 from langgraph.graph.message import AnyMessage, add_messages
 from openai import AsyncOpenAI
 from pydantic import BaseModel
 from tabulate import tabulate
 from typing_extensions import Annotated, TypedDict
-from langgraph.constants import START
 
 from mcp_http_client import MCPHTTPCLIENT
 
@@ -226,51 +224,38 @@ def create_workflow(memory):
     ## TODO
     ## Define nodes and edges for graph
     workflow.add_node("intent_classifier", intent_classifier)
-    workflow.add_edge(START, "intent_classifier")
-    workflow.add_node("store_agent", store_agent)
-    workflow.add_edge("intent_classifier", "store_agent", condition=lambda state: state["intent"] == "valid", label="continue")
-    workflow.add_edge("intent_classifier", "human", condition=lambda state: state["intent"] == "unknown", label="human")
     workflow.add_node("human", human_node)
-    workflow.add_edge("human", "store_agent")
-    workflow.add_edge("store_agent", "intent_classifier")
+    workflow.add_node("store_agent", store_agent)
     workflow.add_node("compile_followup", compile_followup)
+    # 시작 → 분류
+    workflow.add_edge(START, "intent_classifier")
+
+    # intent 분기: valid → store_agent / unknown(기타) → human
+    workflow.add_conditional_edges(
+        "intent_classifier",
+        lambda s: "to_store" if s.get("intent") == "valid" else "to_human",
+        {
+            "to_store": "store_agent",
+            "to_human": "human",
+        },
+    )
+
+    # human → store_agent (사람 입력 받은 뒤 저장 단계로)
+    workflow.add_edge("human", "store_agent")
+
+    # store_agent → compile_followup (그림처럼 직선 흐름)
     workflow.add_edge("store_agent", "compile_followup")
-    workflow.add_edge("compile_followup", "intent_classifier")
-    app = workflow.compile()
+
+    # compile_followup → END
+    workflow.add_edge("compile_followup", END)
+
+    # 체크포인터 + human 진입 전에 인터럽트
+    app = workflow.compile(
+        checkpointer=memory,
+        interrupt_before=["human"],  # 👈 그림의 "__interrupt = before"
+    )
     return app
 
 
 async def run(app, config, input):
     await app.ainvoke(input, debug=True, config=config)
-
-
-async def main():
-    nvidia_api_key = '<your nvidia api key'
-    mcp_server_url = "http://localhost:8000/mcp"
-    inf_url = "https://integrate.api.nvidia.com/v1"
-
-    memory = InMemorySaver()
-    config = {
-        "configurable": {"thread_id": "1"},
-        "env": "test",
-        "nvidia_api_key": nvidia_api_key,
-        "mcp_server_url": mcp_server_url,
-        "inf_url": inf_url
-    }
-    app = create_workflow(memory=memory)
-
-    state = {
-        "messages": [
-            {
-                "role": "user",
-                "content": "my name is Aaron Mitchell and my number is +1 (204) 452-6452. I bought some songs by the artist Led Zeppelin that i'd like refunded",
-            }
-        ]}
-
-    await run(app, config, state)
-    snapshot = app.get_state(config)
-    print(snapshot.values)
-
-
-if __name__ == '__main__':
-    asyncio.run(main())
